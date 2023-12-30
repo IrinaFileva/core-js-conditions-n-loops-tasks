@@ -509,11 +509,29 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let iterationStr = str;
+  let iteration = iterations;
+
+  for (let t = 0; t < iteration; t += 1) {
+    let startStr = '';
+    let endStr = '';
+    for (let i = 0; i < iterationStr.length; i += 2) {
+      startStr += iterationStr[i];
+      endStr += iterationStr[i + 1];
+    }
+
+    iterationStr = startStr + endStr;
+
+    if (iterationStr === str) {
+      iteration = iterations % [t + 1];
+      t = -1;
+    }
+  }
+  return iterationStr;
 }
 
-/**
+/** ]
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
  * Usage of String class methods is not allowed in this task.
